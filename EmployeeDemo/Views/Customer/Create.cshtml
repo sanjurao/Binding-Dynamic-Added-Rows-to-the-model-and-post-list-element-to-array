@@ -1,0 +1,49 @@
+﻿@using EmployeeDemo.Models;
+@model EmployeeDemo.Models.CustomerViewModel
+
+<script type="text/javascript" src="../../Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".addTr").click(function () {
+            var rowCt = $("#tblPhoneList tr").length-1;
+            var row = '<tr><td>' + rowCt + '</td><td><input type="text" name="Phones[' + rowCt + '].Type" class="phoneNumber" /></td><td><input type="text" name="Phones[' + rowCt + '].Number" class="phoneNumber" /></td></tr>';
+            $("#tblPhoneList").append(row);
+        });
+    });
+</script>
+
+<h1>Create Employee</h1>
+
+<form action="/Customer/Create" method="post">
+
+    <p>
+        @Html.LabelFor(model => model.ID)
+        @Html.DisplayFor(model => model.ID)
+        @Html.HiddenFor(model => model.ID)
+    </p>
+
+    <p>
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </p>
+    <table id="tblPhoneList">
+        <thead>
+        </thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>Phone Type</th>
+            <th>Phone Number</th>
+        </tr>
+    </table>
+    <p>
+        <a href="javascript:void(0);" class="addTr">Add Tr</a>
+    </p>
+
+    <p>
+        <input type="submit" name="btnSubmit" value="Create new customer" />
+    </p>
+
+</form>

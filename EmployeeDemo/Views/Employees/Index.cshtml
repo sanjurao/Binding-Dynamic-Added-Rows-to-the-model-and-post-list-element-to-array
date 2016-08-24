@@ -1,0 +1,47 @@
+﻿@using EmployeeDemo.Models;
+@model IEnumerable<EmployeeDemo.Models.EmployeeViewModel>
+
+<h1>Employees</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var employee in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => employee.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(model => employee.Name)
+            </td>
+            <td>
+                <ul>
+                    @foreach (Phone phone in employee.Phones)
+                    {
+                        <li>@(phone.Type + " " + phone.Number)</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { employeeID = employee.ID })
+            </td>
+        </tr>
+    }
+
+</table>
